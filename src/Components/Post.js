@@ -14,8 +14,7 @@ const Post = ({ profilePic, image, imgName, username, timestamp, message }) => {
         <Avatar src={profilePic} className="post__avatar"></Avatar>
         <div className="post__topInfo">
           <h3>{username}</h3>
-          <p>{new Date(parseInt(timestamp)).toUTCString()}</p>
-          {/* image later from backend */}
+          <p>{new Date(timestamp?.toDate()).toUTCString()}</p>
         </div>
       </div>
 

@@ -5,38 +5,55 @@ import "./MessageSender.css";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
+import { useStateValue } from "../StateProvider";
+
+import firebase from "firebase";
+import db from "../firebase";
 
 const MessageSender = () => {
-  const [input, setInput] = useState("");
-  const [image, setImage] = useState(null);
+  const [{ user }, dispatch] = useStateValue();
 
-  function handleSubmit() {
-    console.log("Submitting");
-  }
-  function handleChange(e) {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
-  }
+  const [input, setInput] = useState("");
+
+  const [imageURL, setImageURL] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    db.collection("posts").add({
+      message: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      profilePic: user.photoURL,
+      username: user.displayName,
+      image: imageURL,
+    });
+
+    setInput("");
+    setImageURL("");
+  };
+
+  // function handleChange(e) {
+  //   if (e.target.files[0]) {
+  //     setImageURL(e.target.files[0]);
+  //   }
+  // }
 
   return (
     <div className="messageSender">
       <div className="messageSender__top">
-        <Avatar src="https://avatars.githubusercontent.com/u/7493938?v=4"></Avatar>
+        <Avatar src={user.photoURL}></Avatar>
         <form action="">
           <input
-            type="text"
-            placeholder="Whats on your mind?"
+            placeholder={`Whats on your mind, ${user.displayName}?`}
             className="messageSender__input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <Input
-            type="file"
+          <input
+            // type="file"
             className="messageSender__fileSelector"
-            name=""
-            id=""
-            onChange={handleChange}
+            placeholder="image URL (Optional)"
+            // onChange={handleChange}
+            onChange={(e) => setImageURL(e.target.value)}
           />
           <button onClick={handleSubmit} type="submit">
             Hidden Submit

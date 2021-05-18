@@ -28,6 +28,12 @@
   background-color: #eff2f5;
 }
 
+@media (max-width: 1200px) {
+  .messageSender__top > form > button {
+    display: block;
+  }
+}
+
 .messageSender__input {
   flex: 1;
 }
@@ -42,6 +48,7 @@
   background-color: transparent;
   color: transparent;
   border: none;
+  display: none;
 }
 
 .messageSender__bottom {

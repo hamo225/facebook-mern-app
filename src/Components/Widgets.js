@@ -11,8 +11,6 @@ const Widgets = () => {
         style={{ border: "none", overflor: "hidden" }}
         scrolling="no"
         overflow="hidden"
-        frameborder="0"
-        allowTransparency="true"
         allow="encrypted-media"
         title="facebooklive"
       ></iframe>
@@ -23,8 +21,6 @@ const Widgets = () => {
         style={{ border: "none", overflor: "hidden" }}
         scrolling="no"
         overflow="hidden"
-        frameborder="0"
-        allowTransparency="true"
         allow="encrypted-media"
         title="facebooklive"
       ></iframe>
