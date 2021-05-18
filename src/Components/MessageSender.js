@@ -24,7 +24,7 @@ const MessageSender = () => {
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       profilePic: user.photoURL,
       username: user.displayName,
-      image: imageURL,
+      img: imageURL,
     });
 
     setInput("");
@@ -53,6 +53,7 @@ const MessageSender = () => {
             className="messageSender__fileSelector"
             placeholder="image URL (Optional)"
             // onChange={handleChange}
+            value={imageURL}
             onChange={(e) => setImageURL(e.target.value)}
           />
           <button onClick={handleSubmit} type="submit">
